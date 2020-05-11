@@ -1,12 +1,12 @@
 import cv2
+from recognize_person import recognize_hw
 
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
 img = cv2.imread('oktoberfest.jpg')
 
-
 ratio = img.shape[0]/img.shape[1]
-img = cv2.resize(img, (500, int(ratio*500)))
+img = cv2.resize(img, (2000, int(ratio*2000)))
 
 gs = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
@@ -15,8 +15,19 @@ faces = face_cascade.detectMultiScale(gs, 1.1, 6)
 #face_images = []
 
 for (x, y, w, h) in faces:
-	cv2.rectangle(img, (x,y), (x+w, y+h), (255,0,0), 2)
-	#face_images = face_images.append(img[y:y+h, x:x+w])
+	cv2.rectangle(img, (x,y), (x+w, y+h), (255,0,0), 5)
+	face = img[y:y+h, x:x+w]
+	face = cv2.resize(face, (100,100))
+
+	#print(face.shape)
+	identity = recognize_hw(face, 'handwriting_007', ext='_maxacc')
+	cv2.putText(img, identity, (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 2, (0,255,0), 5)
+
+
+img = cv2.resize(img, (800, int(ratio*800)))
+
+cv2.imwrite('tagged_oktoberfest.jpg', img)
+
 
 cv2.imshow('img', img)
 
