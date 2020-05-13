@@ -16,7 +16,7 @@ from sklearn.model_selection import train_test_split
 
 import generate_data
 
-save_name = 'handwriting_009'
+save_name = 'simplecnn_009'
 
 people = ['Tim', 'Dan', 'Malachi', 'Grant', 'Jess', 'Lindsey', 'Sydney', 'Kate']
 

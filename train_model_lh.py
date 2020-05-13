@@ -16,7 +16,7 @@ from sklearn.model_selection import train_test_split
 
 import generate_data
 
-save_name = 'levi-hassner_001'
+save_name = 'levi-hassner_008'
 
 people = ['Tim', 'Dan', 'Malachi', 'Grant', 'Jess', 'Lindsey', 'Sydney', 'Adam', 'Kate', 'Ben']
 
@@ -78,10 +78,10 @@ model.add(MaxPooling2D(pool_size=(3, 3)))
 #model.add(Dropout(0.1))
 model.add(Flatten())
 model.add(Dense(512, activation='relu'))
-model.add(Dropout(0.25))
+model.add(Dropout(0.5))
 model.add(Dense(512, activation='relu'))
-model.add(Dropout(0.25))
-model.add(Dense(y.shape[1], activation='sigmoid'))
+model.add(Dropout(0.5))
+model.add(Dense(y.shape[1], activation='softmax'))
 
 model.compile(loss='categorical_crossentropy',
               optimizer=keras.optimizers.Adadelta(),
